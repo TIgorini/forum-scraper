@@ -42,8 +42,8 @@ def get_posts(topic):
         })
         if post['author'] not in authors:
             authors.append(post['author'])
-    
+
     data['authors'] = []
     for auth in authors:
-        data['authors'].append([auth, posts.find({'topic': topic,'author': auth}).count()])
+        data['authors'].append([auth, posts.find({'topic': topic, 'author': auth}).count()])
     return jsonify(data)

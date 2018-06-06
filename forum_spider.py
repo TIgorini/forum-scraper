@@ -36,4 +36,3 @@ class ForumSpider(scrapy.Spider):
             yield post
 
         yield response.follow(response.css('a.Next::attr(href)').extract_first(), self.parse_post)
-
