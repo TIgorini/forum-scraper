@@ -1,11 +1,16 @@
-google.charts.load('current', {'packages':['corechart']})
+$(document).ajaxError(function(e, xhr, settings, exception) {
+    $('#piechart').text('No results')  
+})
 
 
 var forum = new Vue({
     el: '#content',
+    delimiters: ["[[", "]]"],
     data: {
         topic: '',
-        topics: []
+        topics: [],
+        posts: [],
+        topic_timeline: false
     },
     created () {
         $.get('/get_topics', function(json){
@@ -17,17 +22,21 @@ var forum = new Vue({
         getTopicPosts: function(event){
             event.preventDefault()
             $.get('/get_posts/' + this.topic, function(json){
+                console.log(json.posts.length)
                 if (json.posts.length == 0){
                     $('#piechart').text('No results')
+                    setTopic_Timeline(false)
                     return
                 }
+                setPosts(json.posts)
+                setTopic_Timeline(true)
                 var chartData = json.authors
                 chartData.splice(0, 0, ['Author', 'Posts'])
         
                 var options = {
                     'title': json.topic,
                     'width': 800,
-                    'height': 500,
+                    'height': 450,
                     'pieHole': 0.4,
                     'backgroundColor': '#e6e6e6'
                 }
@@ -38,14 +47,21 @@ var forum = new Vue({
 })
 
 
-function setTopics(json){
-    forum.topics = forum.topics.concat(json)
+function setTopics(data){
+    forum.topics = data
 }
-
 function setTopic(data){
     forum.topic = data
 }
+function setPosts(data){
+    forum.posts = data
+}
+function setTopic_Timeline(flag){
+    forum.topic_timeline = flag
+}
 
+
+google.charts.load('current', {'packages':['corechart']})
 function drawChart(dataChart, options){
     var data = google.visualization.arrayToDataTable(dataChart)
     var chart = new google.visualization.PieChart(document.getElementById('piechart'))
@@ -96,7 +112,11 @@ function autocomplete(inp, topics) {
         } else if (e.keyCode == 13) {
             e.preventDefault()
             if (currentFocus > -1) {
-                if (x) x[currentFocus].click()
+                if (x) {
+                    x[currentFocus].click()
+                    currentFocus = -1
+                    forum.getTopicPosts(e)
+                }
             } else {
                 forum.getTopicPosts(e)
                 closeAllLists()

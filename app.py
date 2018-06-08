@@ -3,6 +3,7 @@ from flask import render_template
 from flask import url_for
 from flask import jsonify
 from pymongo import MongoClient
+import dateutil.parser
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -15,7 +16,7 @@ topics = client.forum_inf.topics
 
 @app.route('/')
 def index():
-    return render_template('index.html', topic='{{topic}}')
+    return render_template('index.html')
 
 
 @app.route('/get_topics')
@@ -35,9 +36,10 @@ def get_posts(topic):
     authors = []
     data['posts'] = []
     for post in tposts:
+        d = dateutil.parser.parse(post['datetime'][:19])
         data['posts'].append({
             'author': post['author'],
-            'datetime': post['datetime'],
+            'datetime': d.strftime('%d.%m.%Y --> %H:%M:%S'),
             'text': post['text'] 
         })
         if post['author'] not in authors:

@@ -1,9 +1,13 @@
 body {
     background-color: #e6e6e6;
+}
+
+#content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .search-panel {
     display: flex;
@@ -19,6 +23,7 @@ form .textbox {
     height: 30px;
     width: 500px;
     padding: 0 16px;
+    outline: 0;
     background-color: rgba(255, 255, 255, 0.6);
     color: #212121;
     border: 0;
@@ -33,6 +38,7 @@ form .button {
     height: 30px;
     width: 30px;
     border: 0;
+    outline: 0;
     color: #FFF;
     font: normal normal normal 14px/1 FontAwesome;
     text-rendering: auto;
@@ -73,3 +79,35 @@ form .button:hover {
     text-align: center;
 }
 
+
+.topic-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trigger-area {
+    margin-bottom: 20px;
+}
+.trigger-area btn:focus {
+    outline: 0;
+}
+
+.table-area {
+    width: 90%;
+}
+.table-area th {
+    text-align: center;
+}
+.table-area .th-datetime {
+    width: 200px;
+}
+.table-area .th-user {
+    width: 200px;
+}
+.table-area .td-user {
+    padding-left: 20px;
+}
+.table-area .td-datetime {
+    text-align: center;
+}

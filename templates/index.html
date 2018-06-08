@@ -19,9 +19,36 @@
         </div>
 
         <div id="piechart"></div>
+        <div class="topic-timeline" v-if="topic_timeline">
+            <div class="trigger-area">
+                <button class="btn btn-sm" data-toggle="collapse" data-target="#messages" aria-expanded="false" aria-controls="messages" style="box-shadow: none;">
+                    <i class="material-icons" style="font-size: 14px;">expand_more</i>
+                    Show timeline
+                </button>
+            </div>
+            <div class="collapse table-area" id="messages">
+                <table class="table table-sm table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="th-datetime" scope="col">Datetime</th>
+                            <th class="th-user" scope="col">User</th>
+                            <th scope="col">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="post in posts">
+                           <td class="td-datetime">[[post.datetime]]</td>
+                           <td class="td-user">[[post.author]]</td>
+                           <td>[[post.text]]</td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
