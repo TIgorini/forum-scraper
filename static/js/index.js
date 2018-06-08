@@ -22,14 +22,13 @@ var forum = new Vue({
         getTopicPosts: function(event){
             event.preventDefault()
             $.get('/get_posts/' + this.topic, function(json){
-                console.log(json.posts.length)
                 if (json.posts.length == 0){
                     $('#piechart').text('No results')
-                    setTopic_Timeline(false)
+                    setTopicTimeline(false)
                     return
                 }
                 setPosts(json.posts)
-                setTopic_Timeline(true)
+                setTopicTimeline(true)
                 var chartData = json.authors
                 chartData.splice(0, 0, ['Author', 'Posts'])
         
@@ -56,7 +55,7 @@ function setTopic(data){
 function setPosts(data){
     forum.posts = data
 }
-function setTopic_Timeline(flag){
+function setTopicTimeline(flag){
     forum.topic_timeline = flag
 }
 
