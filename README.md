@@ -1,21 +1,10 @@
-# LAB2
+# Forum scraper
 
-## Етапи виконання роботи
+Program to scrap data about posts and their authors in discussions at 
+3D-modeling forum. For navigation and visualisation for scraped data used 
+web-oriented interface with Flask, Vue and Google Charts.
+As database was used MongoDB. For scraping used scrapy framework. 
 
-1. За допомогою модуля Scrapy реалізувати програмні засоби для отримання
-повідомлень з Інтернет-форумів, відповідно до тематики, яка вказана в варіанті
-завдання.
-2. Для кожного отриманого повідомлення зберігти в базі даних MongoDB ім’я
-автора, дату, текст, ідентифікатор теми.
-3. Використовуючи фреймворк Flask, реалізувати веб-орінтований додаток, який
-дозволить для вибраної теми виводити на екран інформацію про кількість
-повідомлень для заданого автора. Результат повинен відображатись на
-веб-сторінці у вигляді таблиці та діаграми.
-
-## Варіант 10
-
-Тематика форума - 3D-моделювання
-
-##Ресурс, що використовувався для скрапінгу:
+### Scraped source:
 
 http://polycount.com/categories/general-discussion
